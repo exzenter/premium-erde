@@ -55,6 +55,40 @@
   });
 })();
 
+// ── Carousel arrows: move to accordion header on mobile ──
+(function(){
+  var header = document.getElementById('nlh-accordion-header');
+  var area   = document.getElementById('nlh-carousel-area');
+  var prev   = document.getElementById('nlh-btn-prev');
+  var next   = document.getElementById('nlh-btn-next');
+
+  function stopProp(e) { e.stopPropagation(); }
+
+  function reposition() {
+    var mobile = window.innerWidth <= 767;
+    if (mobile && prev.parentElement !== header) {
+      header.style.position = 'relative';
+      header.appendChild(prev);
+      header.appendChild(next);
+      prev.style.left = '1rem';
+      next.style.right = '1rem';
+      prev.addEventListener('click', stopProp);
+      next.addEventListener('click', stopProp);
+    } else if (!mobile && prev.parentElement !== area) {
+      header.style.position = '';
+      area.appendChild(prev);
+      area.appendChild(next);
+      prev.style.left = '1.25rem';
+      next.style.right = '1.25rem';
+      prev.removeEventListener('click', stopProp);
+      next.removeEventListener('click', stopProp);
+    }
+  }
+
+  reposition();
+  window.addEventListener('resize', reposition);
+})();
+
 // ── Burger menu ──
 const burger = document.getElementById('burger');
 const mobileMenu = document.getElementById('mobile-menu');

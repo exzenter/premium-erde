@@ -201,12 +201,12 @@ nav a:hover {
   position: absolute;
   right: 2vw;
   rotate: 14deg;
-  top: -20vh;
+  top: -46vh;
   z-index: 99999;
 }
 .green-content h1 {
   font-family: "Playfair Display", serif;
-  font-size: 6vw;
+  font-size: 7.8vw;
   font-weight: 900;
   color: #1a3a0a;
   line-height: 1.1;
@@ -214,7 +214,7 @@ nav a:hover {
 .green-content h1 span {
   display: block;
   font-family: none;
-  font-size: 1.7vw;
+  font-size: 2.1vw;
   font-weight: 800;
   color: #2d5a1a;
   margin-top: 0.5rem;
