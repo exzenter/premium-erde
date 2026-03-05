@@ -24,7 +24,9 @@ try {
     $mail->Host       = 'smtp.resend.com';
     $mail->SMTPAuth   = true;
     $mail->Username   = 'resend';
-    $mail->Password   = getenv('RESEND_API_KEY'); // in Cloudways ENV setzen
+    $configFile = __DIR__ . '/config.php';
+    if (file_exists($configFile)) require $configFile;
+    $mail->Password   = defined('RESEND_API_KEY') ? RESEND_API_KEY : getenv('RESEND_API_KEY');
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port       = 465;
 
