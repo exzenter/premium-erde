@@ -139,6 +139,11 @@ nav a:hover {
     padding-right: 1rem !important;
   }
 
+  .leaf-sticky {
+    margin-left: -1rem;
+    width: calc(100% + 2rem);
+  }
+
   section div[style*="padding: 2.5rem"] {
     padding-left: 1.25rem !important;
     padding-right: 1.25rem !important;
@@ -313,7 +318,7 @@ nav a:hover {
 .tagline-inner {
   max-width: 800px;
   text-align: center;
-  padding: 3rem 2rem;
+  padding: 3rem 0rem;
   pointer-events: auto;
 }
 .tagline-inner .tagline {
@@ -323,7 +328,7 @@ nav a:hover {
 .tagline-inner .tagline span {
   font-family: 'Playfair Display', sans-serif;
   font-weight: 800;
-  font-size: clamp(1.8rem, 3vw, 3.5rem);
+  font-size: clamp(1.5rem, 3vw, 3.5rem);
   color: #fff;
   background-color: rgb(222 6 110);
   padding: 0.1em 0.5em;
@@ -334,6 +339,13 @@ nav a:hover {
 .tagline-inner .sub {
   line-height: 2;
 }
+
+@media (max-width: 940px) {
+.tagline-inner .sub {
+    line-height: 1.3;
+}}
+
+
 .tagline-inner .sub span {
   font-family: sans-serif;
   font-weight: 400;
