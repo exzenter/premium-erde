@@ -134,7 +134,7 @@ nav a:hover {
 }
 
 @media (max-width: 500px) {
-  section {
+  section:not(.hero-image) {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
   }
