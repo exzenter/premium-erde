@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start \"\" \"c:\\\\Users\\\\moijto\\\\Desktop\\\\premiumerdehero\\\\refactored\\\\index.html\")"
+    ]
+  }
+}
