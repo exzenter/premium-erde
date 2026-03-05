@@ -18,6 +18,18 @@ $menge     = htmlspecialchars(trim($_POST['menge']     ?? ''));
 $einheit   = htmlspecialchars(trim($_POST['einheit']   ?? ''));
 $nachricht = htmlspecialchars(trim($_POST['nachricht'] ?? ''));
 
+function save_to_csv($name, $email, $menge, $einheit, $nachricht, $status) {
+    $dir  = __DIR__ . '/data';
+    $file = $dir . '/anfragen.csv';
+    if (!is_dir($dir)) mkdir($dir, 0755, true);
+    $new = !file_exists($file);
+    $fh  = fopen($file, 'a');
+    if (!$fh) return;
+    if ($new) fputcsv($fh, ['Datum', 'Name', 'Email', 'Menge', 'Einheit', 'Nachricht', 'Email-Status']);
+    fputcsv($fh, [date('Y-m-d H:i:s'), $name, $email, $menge, $einheit, $nachricht, $status]);
+    fclose($fh);
+}
+
 $mail = new PHPMailer(true);
 try {
     $mail->isSMTP();
@@ -30,9 +42,8 @@ try {
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port       = 465;
 
-    // FROM muss eine verifizierte Domain bei Resend sein
-    $mail->setFrom('hanni@premium-erde.de', 'Premium Erde');
-    $mail->addAddress('hanni@premium-erde.de', 'Hanni');
+    $mail->setFrom('info@premium-erde.de', 'Premium Erde');
+    $mail->addAddress('info@premium-erde.de', 'Hanni');
     if ($email) {
         $mail->addReplyTo($email, $name ?: 'Anfrage');
     }
@@ -50,8 +61,10 @@ try {
     $mail->Body = $body;
 
     $mail->send();
+    save_to_csv($name, $email, $menge, $einheit, $nachricht, 'gesendet');
     echo json_encode(['ok' => true]);
 } catch (Exception $e) {
+    save_to_csv($name, $email, $menge, $einheit, $nachricht, 'email-fehler');
     http_response_code(500);
     echo json_encode(['ok' => false, 'error' => $mail->ErrorInfo]);
 }
